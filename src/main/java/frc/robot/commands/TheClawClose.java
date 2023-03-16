@@ -4,21 +4,21 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ElevatorRotateSubsystem;
+import frc.robot.subsystems.TheClawSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ElevatorRotateBackward extends CommandBase {
-  private final ElevatorRotateSubsystem m_elevatorRotateSubsystem;
+public class TheClawClose extends CommandBase {
+  private final TheClawSubsystem m_theClawSubsystem;
 
-  public ElevatorRotateBackward(ElevatorRotateSubsystem elevatorRotateSubsystem) {
-    m_elevatorRotateSubsystem = elevatorRotateSubsystem;
-    addRequirements(m_elevatorRotateSubsystem);
+  public TheClawClose(TheClawSubsystem theClawSubsystem) {
+    m_theClawSubsystem = theClawSubsystem;
+    addRequirements(m_theClawSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    m_elevatorRotateSubsystem.rotateBackward();
+    m_theClawSubsystem.close();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -30,6 +30,6 @@ public class ElevatorRotateBackward extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-      m_elevatorRotateSubsystem.stop();
+      m_theClawSubsystem.stop();
   }
 }

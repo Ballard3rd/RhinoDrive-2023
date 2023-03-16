@@ -40,24 +40,18 @@ public static final class OIConstants {
 
 public static final class ElevatorRotateConstants {
     // SPARK MAX CAN IDs
-    public static final int kLeftRotateCanId = 18;
-    public static final int kRightRotateCanId = 19;
-    public static final boolean kElevatorRotateLeftEncoderInverted = false;
-    public static final boolean kElevatorRotateRightEncoderInverted = true;	
+    public static final int kLeftRotateCanId = 10;
+    public static final boolean kElevatorRotateMotorInverted = false;
   }
 
   
   public static final class ElevatorExtendConstants {
-    public static final int kLeftExtendCanId = 20;
-    public static final int kRightExtendCanId = 21;
-    public static final boolean kElevatorExtendLeftEncoderInverted = false;
-    public static final boolean kElevatorExtendRightEncoderInverted = true;    
+    public static final int kLeftExtendCanId = 11;
+    public static final boolean kElevatorExtendMotorInverted = false; 
   }
 
   public static final class GrabberConstants {
-    public static final int kLeftGrabberCanId = 22;
-    public static final int kRightGrabberCanId = 23;
-    public static final boolean kGrabberLeftEncoderInverted = false;
-    public static final boolean kGrabberRightEncoderInverted = true;	
+    public static final int kLeftGrabberCanId = 12;
+    public static final boolean kGrabberMotorInverted = false;
   }
 }

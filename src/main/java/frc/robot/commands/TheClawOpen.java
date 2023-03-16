@@ -4,21 +4,21 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.GrabberSubsystem;
+import frc.robot.subsystems.TheClawSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class GrabberOpen extends CommandBase {
-  private final GrabberSubsystem m_grabberSubsystem;
+public class TheClawOpen extends CommandBase {
+  private final TheClawSubsystem m_theClawSubsystem;
 
-  public GrabberOpen(GrabberSubsystem grabberSubsystem) {
-    m_grabberSubsystem = grabberSubsystem;
-    addRequirements(m_grabberSubsystem);
+  public TheClawOpen(TheClawSubsystem theClawSubsystem) {
+    m_theClawSubsystem = theClawSubsystem;
+    addRequirements(m_theClawSubsystem);
   }
 
   // Called just before this Command runs the first time
   @Override
   public void initialize() {
-    m_grabberSubsystem.open();
+    m_theClawSubsystem.open();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -30,6 +30,6 @@ public class GrabberOpen extends CommandBase {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-      m_grabberSubsystem.stop();
+      m_theClawSubsystem.stop();
   }
 }
