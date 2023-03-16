@@ -5,14 +5,13 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ElevatorExtendSubsystem;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ElevatorRetract extends WaitCommand {
+public class ElevatorRetract extends CommandBase {
   private final ElevatorExtendSubsystem m_elevatorExtendSubsystem;
 
-  public ElevatorRetract(ElevatorExtendSubsystem elevatorExtendSubsystem) {
-    super(1);
-    m_elevatorExtendSubsystem = elevatorExtendSubsystem;
+  public ElevatorRetract(ElevatorExtendSubsystem elevatorRotateSubsystem) {
+    m_elevatorExtendSubsystem = elevatorRotateSubsystem;
     addRequirements(m_elevatorExtendSubsystem);
   }
 
@@ -20,7 +19,6 @@ public class ElevatorRetract extends WaitCommand {
   @Override
   public void initialize() {
     m_elevatorExtendSubsystem.retract();
-    super.initialize();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +30,6 @@ public class ElevatorRetract extends WaitCommand {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    m_elevatorExtendSubsystem.stop();
+      m_elevatorExtendSubsystem.stop();
   }
 }

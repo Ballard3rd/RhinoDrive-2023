@@ -5,13 +5,12 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.GrabberSubsystem;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class GrabberOpen extends WaitCommand {
+public class GrabberOpen extends CommandBase {
   private final GrabberSubsystem m_grabberSubsystem;
 
   public GrabberOpen(GrabberSubsystem grabberSubsystem) {
-    super(1);
     m_grabberSubsystem = grabberSubsystem;
     addRequirements(m_grabberSubsystem);
   }
@@ -20,7 +19,6 @@ public class GrabberOpen extends WaitCommand {
   @Override
   public void initialize() {
     m_grabberSubsystem.open();
-    super.initialize();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -32,6 +30,6 @@ public class GrabberOpen extends WaitCommand {
   // Called once after isFinished returns true
   @Override
   public void end(boolean interrupted) {
-    m_grabberSubsystem.stop();
+      m_grabberSubsystem.stop();
   }
 }
