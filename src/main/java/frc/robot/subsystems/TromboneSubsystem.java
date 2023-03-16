@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants.ElevatorExtendConstants;
+import frc.robot.Constants.TromboneConstants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * motors, you should probably use a sensor so that the motors don't stall.
  */
 public class TromboneSubsystem extends SubsystemBase {
-  private final CANSparkMax m_Motor = new CANSparkMax(ElevatorExtendConstants.kLeftExtendCanId, MotorType.kBrushless);
+  private final CANSparkMax m_Motor = new CANSparkMax(TromboneConstants.kTromboneCanId, MotorType.kBrushless);
 
   /** Create a new claw subsystem. */
   public TromboneSubsystem() {
@@ -24,7 +24,7 @@ public class TromboneSubsystem extends SubsystemBase {
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.
-    m_Motor.setInverted(ElevatorExtendConstants.kElevatorExtendMotorInverted);
+    m_Motor.setInverted(TromboneConstants.kTromboneMotorInverted);
   
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.

@@ -38,20 +38,20 @@ public static final class OIConstants {
 	public static final int kXboxLeftYAxis = 4;
   }
 
-public static final class ElevatorRotateConstants {
+public static final class TurretRotateConstants {
     // SPARK MAX CAN IDs
-    public static final int kLeftRotateCanId = 10;
-    public static final boolean kElevatorRotateMotorInverted = false;
+    public static final int kTurretRotateCanId = 10;
+    public static final boolean kTurretRotateMotorInverted = false;
   }
 
   
-  public static final class ElevatorExtendConstants {
-    public static final int kLeftExtendCanId = 11;
-    public static final boolean kElevatorExtendMotorInverted = false; 
+  public static final class TromboneConstants {
+    public static final int kTromboneCanId = 11;
+    public static final boolean kTromboneMotorInverted = false; 
   }
 
-  public static final class GrabberConstants {
-    public static final int kLeftGrabberCanId = 12;
-    public static final boolean kGrabberMotorInverted = false;
+  public static final class TheClawConstants {
+    public static final int kTheClawCanId = 12;
+    public static final boolean kTheClawMotorInverted = false;
   }
 }

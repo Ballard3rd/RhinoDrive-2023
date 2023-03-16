@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants.ElevatorRotateConstants;
+import frc.robot.Constants.TurretRotateConstants;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * motors for rotatingthe elevator forward and backward.
  */
 public class TurretRotateSubsystem extends SubsystemBase {
-  private final CANSparkMax m_Motor = new CANSparkMax(ElevatorRotateConstants.kLeftRotateCanId, MotorType.kBrushless);
+  private final CANSparkMax m_Motor = new CANSparkMax(TurretRotateConstants.kTurretRotateCanId, MotorType.kBrushless);
 
   /** Create a new elevator rotate subsystem. */
   public TurretRotateSubsystem() {
@@ -24,7 +24,7 @@ public class TurretRotateSubsystem extends SubsystemBase {
 
     // Invert the turning encoder, since the output shaft rotates in the opposite direction of
     // the steering motor in the MAXSwerve Module.
-    m_Motor.setInverted(ElevatorRotateConstants.kElevatorRotateMotorInverted);
+    m_Motor.setInverted(TurretRotateConstants.kTurretRotateMotorInverted);
   
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
     // operation, it will maintain the above configurations.
