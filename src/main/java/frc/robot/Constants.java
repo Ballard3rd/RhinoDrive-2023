@@ -18,40 +18,41 @@ package frc.robot;
 public final class Constants {
 	public static final class DriveConstants {
     // CAN ids for wiring team
-	public static final int kLeftMotorA = 3;
-	public static final int kLeftMotorB = 4;
-	public static final int kLeftMotorC = 5;
-	public static final int kRightMotorA = 6;
-	public static final int kRightMotorB = 7;
-	public static final int kRightMotorC = 8;
+	public static final int kLeftMotorA = 4; // nothing
+	public static final int kLeftMotorB = 7; // checked forward no backwards
+	public static final int kLeftMotorC = 5; // good
+	public static final int kRightMotorA = 2; // good 
+	public static final int kRightMotorB = 3; // checked good
+	public static final int kRightMotorC = 6; // checked good
 
 		// Speeds
 	public static final double kDrivetrainSpeed = 0.7;
-	public static final double kDriveForwardTime = 3.0;
-	public static final double kAutonomousLeftSpeed = 0.6;
-	public static final double kAutonomousRightSpeed = 0.6;
+	public static final double kDriveForwardTime = 2.0;
+	public static final double kAutonomousLeftSpeed = 0.4;
+	public static final double kAutonomousRightSpeed = 0.4;
   }
 
-public static final class OIConstants {
-	public static final int kDriverControllerPort = 0;
-	public static final int kXboxLeftXAxis = 1;
-	public static final int kXboxLeftYAxis = 4;
+  public static final class OIConstants {
+	  public static final int kDriverControllerPort = 0;
+	  public static final int kXboxLeftXAxis = 1;
+	  public static final int kXboxLeftYAxis = 4;
   }
 
-public static final class TurretRotateConstants {
-    // SPARK MAX CAN IDs
+  public static final class TurretRotateConstants {
     public static final int kTurretRotateCanId = 10;
     public static final boolean kTurretRotateMotorInverted = false;
+    public static final double kTurretMotorSpeed = 0.3;
   }
 
-  
   public static final class TromboneConstants {
-    public static final int kTromboneCanId = 11;
-    public static final boolean kTromboneMotorInverted = false; 
+    public static final int kTromboneCanId = 0;
+    public static final boolean kTromboneMotorInverted = false;
+    public static final double kTromboneMotorSpeed = 0.3; 
   }
 
   public static final class TheClawConstants {
     public static final int kTheClawCanId = 12;
     public static final boolean kTheClawMotorInverted = false;
+    public static final double kTheClawMotorSpeed = 0.3;
   }
 }

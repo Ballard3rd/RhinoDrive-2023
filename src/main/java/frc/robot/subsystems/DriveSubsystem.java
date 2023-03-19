@@ -36,22 +36,22 @@ public class DriveSubsystem extends SubsystemBase {
   /**
    * Creates a new DriveTrain.
    */
-  public DriveSubsystem() {
+  public DriveSubsystem(){
     // Instantiate the DriveTrain
-    driveLeftA = new CANSparkMax(DriveConstants.kLeftMotorA, MotorType.kBrushed);
-    driveLeftB = new CANSparkMax(DriveConstants.kLeftMotorB, MotorType.kBrushed);
-    driveLeftC = new CANSparkMax(DriveConstants.kLeftMotorC, MotorType.kBrushed);
-    driveRightA = new CANSparkMax(DriveConstants.kRightMotorA, MotorType.kBrushed);
-    driveRightB = new CANSparkMax(DriveConstants.kRightMotorB, MotorType.kBrushed);
-    driveRightC = new CANSparkMax(DriveConstants.kRightMotorC, MotorType.kBrushed);
+    driveLeftA = new CANSparkMax(DriveConstants.kLeftMotorA, MotorType.kBrushless);
+    driveLeftB = new CANSparkMax(DriveConstants.kLeftMotorB, MotorType.kBrushless);
+    driveLeftC = new CANSparkMax(DriveConstants.kLeftMotorC, MotorType.kBrushless);
+    driveRightA = new CANSparkMax(DriveConstants.kRightMotorA, MotorType.kBrushless);
+    driveRightB = new CANSparkMax(DriveConstants.kRightMotorB, MotorType.kBrushless);
+    driveRightC = new CANSparkMax(DriveConstants.kRightMotorC, MotorType.kBrushless);
 
     // Set inverted field to set motor direction when given a positive speed
     driveLeftA.setInverted(true);
     driveLeftB.setInverted(true);
-    driveLeftC.setInverted(true);
-    driveRightA.setInverted(false);
-    driveRightB.setInverted(false);
-    driveRightC.setInverted(false);
+    driveLeftC.setInverted(false);
+    driveRightA.setInverted(true);
+    driveRightB.setInverted(true);
+    driveRightC.setInverted(true);
 
     // Burn settings to flash 
     // This is needed incase power is lost to the controller
@@ -77,9 +77,8 @@ public class DriveSubsystem extends SubsystemBase {
   }
   
   // driveWithJoysticks is used in teleop mode
-  public void driveWithJoysticks(XboxController controller, double speed) {
-    // Arcade drive has the inputs for the x-axis and y-axis inverted
-    drive.arcadeDrive(controller.getRawAxis(OIConstants.kXboxLeftXAxis)*-speed, controller.getRawAxis(OIConstants.kXboxLeftYAxis)*-speed);
+  public void driveWithJoysticks(double forwardPower, double turnPower) {
+    drive.curvatureDrive(Math.abs(forwardPower) < 0.1 ? 0 : forwardPower, Math.abs(turnPower) < 0.1 ? 0 : turnPower, true);
   }
 
   // driveForward is used in autonomous mode

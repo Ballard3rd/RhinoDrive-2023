@@ -11,22 +11,18 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.TheClawSubsystem;
 import frc.robot.subsystems.TromboneSubsystem;
 import frc.robot.subsystems.TurretRotateSubsystem;
-import frc.robot.commands.TheClawClose;
-import frc.robot.commands.TheClawOpen;
-import frc.robot.commands.TromboneExtend;
-import frc.robot.commands.TromboneRetract;
-import frc.robot.commands.TurretRotateCCW;
-import frc.robot.commands.TurretRotateCW;
-import frc.robot.commands.AutoForward;
 import frc.robot.commands.DriveForwardTimed;
-import frc.robot.commands.DriveWithJoysticks;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -41,12 +37,12 @@ public class RobotContainer {
     private final DriveSubsystem driveTrain;
 
     // Joystick declaration
-    private final DriveWithJoysticks driveWithJoystick;
+    //private final DriveWithJoysticks driveWithJoystick;
     public static XboxController driverJoystick;
 
     // Commands declaration
     private final DriveForwardTimed driveForwardTimed;
-    private final AutoForward autoForward;
+    private final CommandBase autoForward;
     private final TurretRotateSubsystem m_turretRotateSubsystem;
     private final TromboneSubsystem m_tromboneSubsystem;
     private final TheClawSubsystem m_theClawSubsystem;
@@ -60,10 +56,11 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Instantiate the drivetrain
+    driverJoystick = new XboxController(OIConstants.kDriverControllerPort);
     driveTrain = new DriveSubsystem();
-    driveWithJoystick = new DriveWithJoysticks(driveTrain);
-    driveWithJoystick.addRequirements(driveTrain);
-    driveTrain.setDefaultCommand(driveWithJoystick);
+    //driveWithJoystick = new DriveWithJoysticks(driveTrain);
+    //driveWithJoystick.addRequirements(driveTrain);
+    driveTrain.setDefaultCommand(new RunCommand(() -> driveTrain.driveWithJoysticks(driverJoystick.getLeftY(), driverJoystick.getRightX()), driveTrain));
     m_turretRotateSubsystem = new TurretRotateSubsystem();
     m_tromboneSubsystem = new TromboneSubsystem();
     m_theClawSubsystem = new TheClawSubsystem();
@@ -73,10 +70,11 @@ public class RobotContainer {
     driveForwardTimed.addRequirements(driveTrain);
 
     // Instantiate the autoForward command
-    autoForward = new AutoForward(driveTrain);
+    autoForward = new StartEndCommand(() -> driveTrain.driveForward(DriveConstants.kAutonomousLeftSpeed, DriveConstants.kAutonomousRightSpeed), 
+    () -> driveTrain.driveForward(0, 0), driveTrain)
+    .withTimeout(DriveConstants.kDriveForwardTime);
 
     // Instantiate the driverJoystick object
-    driverJoystick = new XboxController(OIConstants.kDriverControllerPort);
 
     // Add choices as options here
 
@@ -96,23 +94,32 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-        // Turret rotate button assignments
+    // Turret rotate button assignments
     new JoystickButton(driverJoystick, XboxController.Button.kY.value)
-        .onTrue(new TurretRotateCW(m_turretRotateSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_turretRotateSubsystem.rotateCW(), 
+    () -> m_turretRotateSubsystem.stop(), m_turretRotateSubsystem));
+
     new JoystickButton(driverJoystick, XboxController.Button.kA.value)
-        .onTrue(new TurretRotateCCW(m_turretRotateSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_turretRotateSubsystem.rotateCCW(),
+    () -> m_turretRotateSubsystem.stop(), m_turretRotateSubsystem));
 
     // Trombone extend button assignments
     new JoystickButton(driverJoystick, XboxController.Button.kX.value)
-        .onTrue(new TromboneExtend(m_tromboneSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_tromboneSubsystem.extend(),
+    () -> m_tromboneSubsystem.stop(), m_tromboneSubsystem));
+
     new JoystickButton(driverJoystick, XboxController.Button.kB.value)
-        .onTrue(new TromboneRetract(m_tromboneSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_tromboneSubsystem.retract(),
+    () -> m_tromboneSubsystem.stop(), m_tromboneSubsystem));
 
     // The Claw button assignments
     new JoystickButton(driverJoystick, XboxController.Button.kLeftBumper.value)
-        .onTrue(new TheClawOpen(m_theClawSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_theClawSubsystem.open(),
+    () -> m_theClawSubsystem.stop(), m_theClawSubsystem));
+
     new JoystickButton(driverJoystick, XboxController.Button.kRightBumper.value)
-        .onTrue(new TheClawClose(m_theClawSubsystem));
+    .whileTrue(new StartEndCommand(() -> m_theClawSubsystem.close(),
+    () -> m_theClawSubsystem.stop(), m_theClawSubsystem));
   }
 
 

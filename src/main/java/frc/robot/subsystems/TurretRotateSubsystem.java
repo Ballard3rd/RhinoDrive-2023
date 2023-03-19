@@ -10,20 +10,19 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /**
- * The elevator rotate subsystem is a simple system with two 
- * motors for rotatingthe elevator forward and backward.
+ * The turret subsystem is a simple system with a motor
+ *  for rotating the turret.
  */
 public class TurretRotateSubsystem extends SubsystemBase {
   private final CANSparkMax m_Motor = new CANSparkMax(TurretRotateConstants.kTurretRotateCanId, MotorType.kBrushless);
 
-  /** Create a new elevator rotate subsystem. */
+  /** Create a new turret rotate subsystem. */
   public TurretRotateSubsystem() {
     // Factory reset, so we get the SPARKS MAX to a known state before configuring
     // them. This is useful in case a SPARK MAX is swapped out.
     m_Motor.restoreFactoryDefaults();
 
-    // Invert the turning encoder, since the output shaft rotates in the opposite direction of
-    // the steering motor in the MAXSwerve Module.
+    // Set whether the motor should be inverted.
     m_Motor.setInverted(TurretRotateConstants.kTurretRotateMotorInverted);
   
     // Save the SPARK MAX configurations. If a SPARK MAX browns out during
@@ -31,22 +30,21 @@ public class TurretRotateSubsystem extends SubsystemBase {
     m_Motor.burnFlash();
   }
 
-  /** Set the elevator rotate motor to move in the backward direction. */
+  /** Set the turret motor to rotate counter clockwise. */
   public void rotateCCW() {
-    m_Motor.set(-1);
+    m_Motor.set(-TurretRotateConstants.kTurretMotorSpeed);
   }
 
-  /** Set the elevator rotate motor to move in the forward direction. */
+  /** Set the turret motor to rotate clockwise. */
   public void rotateCW() {
-    m_Motor.set(1);
+    m_Motor.set(TurretRotateConstants.kTurretMotorSpeed);
   }
 
-  /** Stops the elevator motor from moving. */
+  /** Stops the turret motor from moving. */
   public void stop() {
     m_Motor.set(0);
   }
 
-  /** Call log method every loop. */
   @Override
   public void periodic() {
 
